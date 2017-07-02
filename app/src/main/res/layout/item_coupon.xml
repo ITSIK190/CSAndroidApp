@@ -40,4 +40,13 @@
         android:textSize="20sp"
         tools:text="6/8/2018" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewPrice"
+        android:layout_alignLeft="@+id/textViewEndDate"
+        android:layout_alignTop="@+id/textViewTitle"
+        android:textSize="20sp"
+        tools:text="Price..." />
+
 </RelativeLayout>

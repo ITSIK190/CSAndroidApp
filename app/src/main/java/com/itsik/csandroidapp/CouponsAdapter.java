@@ -28,12 +28,16 @@ public class CouponsAdapter extends ArrayAdapter<Coupon> {
         TextView textViewTitle = (TextView)relativeLayout.findViewById(R.id.textViewTitle);
         TextView textViewStartDate = (TextView)relativeLayout.findViewById(R.id.textViewStartDate);
         TextView textViewEndDate = (TextView)relativeLayout.findViewById(R.id.textViewEndDate);
+        TextView textViewPrice = (TextView)relativeLayout.findViewById(R.id.textViewPrice);
+
+
 
         Coupon coupon = getItem(position);
         imageViewCoupon.setImageResource(R.mipmap.ic_launcher);
         textViewTitle.setText(coupon.getTitle());
         textViewStartDate.setText(coupon.getStartDate());
         textViewEndDate.setText(coupon.getEndDate());
+        textViewPrice.setText(coupon.getPrice()+ " USD");
 
         return relativeLayout;
     }

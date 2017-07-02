@@ -1,15 +1,16 @@
 package com.itsik.csandroidapp;
 
+import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ListActivity {
 
-    private ListView listViewCoupon;
-    private ArrayList<Coupon> food = new ArrayList<>();
+
+    private ArrayList<Coupon> coupons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,17 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        listViewCoupon = (ListView)findViewById(R.id.listViewCoupon);
-
-        food.add(new Coupon("Bread", R.drawable.bread));
-        food.add(new Coupon("Cheese", R.drawable.cheese));
-        food.add(new Coupon("Ice Cream", R.drawable.icecream));
-        food.add(new Coupon("Pizza", R.drawable.pizza));
-        food.add(new Coupon("Sushi", R.drawable.sushi));
-
-        CouponsAdapter foodAdapter = new CouponsAdapter()(this, food);
-
-        listViewCoupon.setAdapter(foodAdapter);
+        for (int i = 0;i<100;i++){
+            Coupon c = new Coupon("Coupon.jpg", "Coupon Title", "6/8/2017", "9/9/2017", 10.5);
+            coupons.add(c);
+        }
+        CouponsAdapter adapter = new CouponsAdapter(this, coupons);
+        setListAdapter(adapter);
 
     }
 }
