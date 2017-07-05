@@ -17,16 +17,23 @@ import java.util.ArrayList;
 public class MainActivity extends ListActivity implements TextDownloader.Callbacks {
 
 
-    private ArrayList<Coupon> coupons = new ArrayList<>();
+    private ArrayList<Coupon> coupons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
 
         TextDownloader textDownloader = new TextDownloader(this);
         textDownloader.execute("http://jsonplaceholder.typicode.com/photos");
+
 
     }
 
@@ -43,6 +50,7 @@ public class MainActivity extends ListActivity implements TextDownloader.Callbac
     @Override
     public void onSuccess(String downloadedText) {
         try {
+            coupons=new ArrayList<>();
             JSONArray jsonArray = new JSONArray(downloadedText);
             for (int i =0; i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
