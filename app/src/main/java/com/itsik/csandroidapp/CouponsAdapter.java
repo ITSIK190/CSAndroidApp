@@ -1,6 +1,7 @@
 package com.itsik.csandroidapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class CouponsAdapter extends ArrayAdapter<Coupon> {
 
         RelativeLayout relativeLayout = (RelativeLayout)layoutInflater.inflate(R.layout.item_coupon, null);
 
-        ImageView imageViewCoupon = (ImageView)relativeLayout.findViewById(R.id.imageViewCoupon);
+        final ImageView imageViewCoupon = (ImageView)relativeLayout.findViewById(R.id.imageViewCoupon);
         TextView textViewTitle = (TextView)relativeLayout.findViewById(R.id.textViewTitle);
         TextView textViewStartDate = (TextView)relativeLayout.findViewById(R.id.textViewStartDate);
         TextView textViewEndDate = (TextView)relativeLayout.findViewById(R.id.textViewEndDate);
@@ -33,11 +34,30 @@ public class CouponsAdapter extends ArrayAdapter<Coupon> {
 
 
         Coupon coupon = getItem(position);
-        imageViewCoupon.setImageResource(R.mipmap.ic_launcher);
+        //imageViewCoupon.setImageResource(R.mipmap.ic_launcher);
         textViewTitle.setText(coupon.getTitle());
         textViewStartDate.setText(coupon.getStartDate());
         textViewEndDate.setText(coupon.getEndDate());
         textViewPrice.setText(coupon.getPrice()+ " USD");
+
+        ImageDownloader imageDownloader = new ImageDownloader(new ImageDownloader.Callbacks() {
+            @Override
+            public void onAboutToBegin() {
+
+            }
+
+            @Override
+            public void onSuccess(Bitmap downloadedBitmap) {
+                imageViewCoupon.setImageBitmap(downloadedBitmap);
+
+            }
+
+            @Override
+            public void onError(int httpStatusCode, String errorMessage) {
+                imageViewCoupon.setImageResource(R.mipmap.ic_launcher);
+            }
+        });
+        imageDownloader.execute(coupon.getImage());
 
         return relativeLayout;
     }
