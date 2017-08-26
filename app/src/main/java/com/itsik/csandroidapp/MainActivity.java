@@ -32,7 +32,7 @@ public class MainActivity extends ListActivity implements TextDownloader.Callbac
 
 
         TextDownloader textDownloader = new TextDownloader(this);
-        textDownloader.execute("http://jsonplaceholder.typicode.com/photos");
+        textDownloader.execute("http://10.0.2.2:8080/CouponWeb/rest/coupons/photos");
 
 
     }
