@@ -32,7 +32,7 @@ public class MainActivity extends ListActivity implements TextDownloader.Callbac
 
 
         TextDownloader textDownloader = new TextDownloader(this);
-        textDownloader.execute("http://10.0.2.2:8080/CouponWeb/rest/coupons/photos");
+        textDownloader.execute("http://10.0.2.2:8080/CouponWeb/rest/getAllCoupons/");
 
 
     }
@@ -54,11 +54,13 @@ public class MainActivity extends ListActivity implements TextDownloader.Callbac
             JSONArray jsonArray = new JSONArray(downloadedText);
             for (int i =0; i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String startDate = jsonObject.getString("startDate");
+                String endDate = jsonObject.getString("endDate");
+                String image = jsonObject.getString("image");
                 String title = jsonObject.getString("title");
+                String price = jsonObject.getString("price");
 
-                String thumbNailUrl = jsonObject.getString("thumbnailUrl");
-
-                Coupon coupon = new Coupon("","" , thumbNailUrl, title, 0.0);
+                Coupon coupon = new Coupon(startDate,endDate , image, title, Double.parseDouble(price));
                 coupons.add(coupon);
             }
             CouponsAdapter adapter = new CouponsAdapter(this, coupons);
